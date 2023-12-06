@@ -2,8 +2,9 @@
 // var router = express.Router();
 var mongoose = require("mongoose")
 const plm = require("passport-local-mongoose");
+require("dotenv").config();
 
-mongoose.connect("mongodb://127.0.0.1:27017/insta")
+mongoose.connect(process.env.Mongouri)
 
 const userSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
