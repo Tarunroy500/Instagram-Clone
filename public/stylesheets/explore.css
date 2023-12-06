@@ -1,0 +1,307 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-container,.image-container {
+    position: relative;
+}
+
+.video-icon,.image-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: white;
+}
+  
+img,
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+video {
+    border: none;
+    outline: none;
+}
+/* Add this CSS to your existing styles */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.grid-item:hover .overlay {
+    opacity: 1;
+}
+
+.like-comment {
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: space-evenly;
+    gap: 10px;
+    
+}
+
+.like-comment i {
+    margin-right: 5px;
+}
+
+.container{
+    display: flex;
+}
+/* Add this CSS to style the left navigation */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100vh;
+    width: 245px;
+    /* justify-content: space-between; */
+    background-color: var(--background-color);
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-inline: 10px;
+    border-right: 0.1px solid rgba(76, 75, 75, 0.466);
+    position: sticky;
+    top: 0px;
+  }
+  
+  @media (max-width: 750px) {
+    .container .navbar {
+      flex-direction: row;
+      background-color: var(--background-color);
+      position: fixed;
+      z-index: 1000;
+      height: 60px;
+      bottom: -1px;
+      top: auto;
+      gap: 0;
+      border-right: none;
+      width: 100vw;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0;
+      box-shadow: -1px 14px 20px 4px black;
+    }
+  
+    .middle-section .post-section {
+      padding: 40px 5px;
+    }
+  
+    .navbar a {
+      display: none;
+    }
+  
+    .navbar .sub-section {
+      padding: 10px 10px;
+    }
+  
+    #hidden {
+      display: none;
+    }
+  
+    #hidden1 {
+      display: none;
+    }
+  
+    #hidden2 {
+      display: none;
+    }
+  
+    .instagram-text-logo {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 1198px) {
+    .navbar .sub-section a {
+      display: none;
+    }
+  
+    .navbar .menu-section a {
+      display: none;
+    }
+  
+    .navbar .sub-section {
+      gap: 0;
+    }
+  
+    .instagram-text-logo {
+      display: none;
+      /* position: absolute; */
+    }
+  
+    .navbar {
+      width: 79px;
+    }
+  }
+  
+  @media (max-width: 1003px) {
+    .follow-section {
+      display: none;
+    }
+  
+    .middle-section .post-area {
+      padding-inline: 0;
+    }
+  }
+  
+  @media (max-width: 690px) {
+    .post-section .story-section {
+      justify-content: space-evenly;
+    }
+  
+    .story-section #story-7 {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 562px) {
+    .story-section #story-6 {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 482px) {
+    .story-section #story-5 {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 402px) {
+    .story-section #story-4 {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 323px) {
+    #story-3 {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 259px) {
+    #story-2 {
+      display: none;
+    }
+  }
+  
+  .instagram-text-logo {
+    width: 100px;
+    margin: 15px 20px;
+    cursor: pointer;
+  }
+  
+  .instagram-text-logo img {
+    width: 100%;
+    /* filter: brightness(5); */
+  }
+  
+  .sub-section {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+  }
+  .sub-section a {
+    all: unset;
+  }
+  
+  .sub-section:hover {
+    background-color: var(--background-on-hover);
+  }
+  
+  .sub-section:hover i {
+    transform: scale(1.07);
+    transition: all 0.2s ease;
+  }
+  
+  .sub-section:hover a {
+    font-weight: 600;
+  }
+  
+  .sub-section:hover .profile-img {
+    transform: scale(1.07);
+    transition: all 0.2s ease;
+  }
+  
+  .sub-section i {
+    font-size: 1.3rem;
+    color: var(--font-color);
+    transition: all 0.2s ease;
+  }
+  
+  .profile-img {
+    width: 22px;
+    height: 22px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .profile-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  
+  .menu-section {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    /* position: absolute;
+      bottom: 10px; */
+    margin-top: 23px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-section:hover {
+    background-color: var(--background-on-hover);
+  }
+  
+  .menu-section:hover i {
+    transform: scale(1.07);
+    transition: all 0.2s ease;
+  }
+  
+  .menu-section i {
+    color: var(--font-color);
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+  }
+  /* search */
+  
+  

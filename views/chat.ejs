@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../stylesheets/chat.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <title>Message</title>
+  </head>
+  <body>
+    <div class="overlay">
+      <!-- post upload form -->
+      <form
+        action="/uploadpost"
+        class="upload-form"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="main-nav">
+          <h3>Create Post</h3>
+          <img src="../images/cross.png" alt="" class="cross" />
+        </div>
+        <div class="upload-nav">
+          <div class="img-cnt">
+            <img src="<%= user.profile_picture %>" />
+          </div>
+          <div class="username"><%=user.fullName%></div>
+        </div>
+        <div class="upload-cnt">
+          <input
+            type="text"
+            name="title"
+            placeholder="What's on your mind ?"
+            id=""
+          />
+          <h6 class="upload-err">Invalid File type</h6>
+          <input type="file" name="file" id="file_inp" onchange="checkFile()" />
+          <button type="submit">Post</button>
+        </div>
+      </form>
+    </div>
+    <div class="overlay2"></div>
+    <!-- card overlay -->
+    <div class="search-card mdl-card mdl-shadow--2dp">
+      <h2>Search</h2>
+      <div class="search-inp">
+        <input class="mdl-textfield__input" type="text" id="sample1" />
+      </div>
+      <h4>recent searches</h4>
+      <div class="search-content"></div>
+    </div>
+    <!-- menu overlay -->
+    <div class="menu-overlay">
+      <div class="menu-bar">
+        <a href="#"><i class="ri-settings-3-line"></i></a>
+        <a href="#">settings</a>
+      </div>
+      <div class="menu-bar">
+        <a href="#"><i class="ri-bookmark-line"></i></a>
+        <a href="#">saved</a>
+      </div>
+      <div class="menu-bar">
+        <a href="#"><i class="ri-error-warning-line"></i></a>
+        <a href="#">blocked</a>
+      </div>
+      <div class="menu-bar">
+        <a href="#">Log out</a>
+      </div>
+    </div>
+    <div class="main">
+      <nav>
+        <nav>
+          <div class="navbar">
+            <div class="instagram-text-logo">
+              <img
+                src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+                id="white-color"
+                alt=""
+              />
+            </div>
+            <a class="search-links" href="/">
+              <div class="sub-section" id="clicked">
+                <i class="fa-solid fa-house"></i>Home
+              </div>
+            </a>
+            <a class="search-links">
+              <div class="sub-section">
+                <i class="fa-solid fa-magnifying-glass search-btn"></i>Search
+              </div>
+            </a>
+            <a class="search-links" href="/reels">
+              <div class="sub-section">
+                <i class="fa-solid fa-clapperboard"></i>Reels
+              </div>
+            </a>
+            <a class="search-links" href="/chat">
+              <div class="sub-section">
+                <i class="fa-regular fa-message"></i>Messages
+              </div>
+            </a>
+
+            <a class="search-links">
+              <div class="sub-section">
+                <i class="fa-regular fa-heart"></i>Notification
+              </div>
+            </a>
+
+            <a class="search-links" href="/explore">
+              <div class="sub-section">
+                <i class="fa-regular fa-compass"></i>Explore
+              </div>
+            </a>
+            <a class="search-links">
+              <div class="sub-section">
+                <i class="fa-solid fa-square-plus"></i>Create
+              </div>
+            </a>
+            <a class="search-links" href="/profile/<%= user._id %>">
+              <div class="sub-section">
+                <div class="profile-img">
+                  <img src="<%= user.profile_picture %>" alt="" />
+                </div>
+                Profile
+              </div>
+            </a>
+            <div class="menu-section" id="hidden">
+              <a> <i class="fa-solid fa-bars"></i></a>
+              <a>More</a>
+            </div>
+          </div>
+        </nav>
+      </nav>
+      <div class="chat-page">
+        <div class="left-sec">
+          <a href="/profile/<%=user._id%>">
+            <div class="left-header">
+              <div class="img">
+                <img src="<%= user.profile_picture %>" alt="" />
+              </div>
+              <div class="profile-name"><%= user.fullName %></div>
+            </div></a
+          >
+          <div class="left-chat-sec">
+            <% allUser.forEach(e => { %>
+            <div
+              class="chat-user"
+              data-id="<%=e._id%>"
+              data-name="<%=e.fullName %>"
+              data-img="<%=e.profile_picture%>"
+            >
+              <div
+                class="img"
+                data-id="<%=e._id%>"
+                data-name="<%=e.fullName %>"
+                data-img="<%=e.profile_picture%>"
+              >
+                <img
+                  data-id="<%=e._id%>"
+                  data-name="<%=e.fullName %>"
+                  data-img="<%=e.profile_picture%>"
+                  src="<%= e.profile_picture %>"
+                  alt=""
+                />
+              </div>
+              <div
+                class="profile-name"
+                data-id="<%=e._id%>"
+                data-name="<%=e.fullName %>"
+                data-img="<%=e.profile_picture%>"
+              >
+                <%= e.fullName %>
+              </div>
+              <% if(e.is_online==1){ %>
+              <sub
+                class="online-status"
+                data-id="<%=e._id%>"
+                data-name="<%=e.fullName %>"
+                data-img="<%=e.profile_picture%>"
+                id="<%= e._id%>-status"
+                >online</sub
+              >
+              <% }else{ %>
+              <sub
+                class="offline-status"
+                data-id="<%=e._id%>"
+                data-name="<%=e.fullName %>"
+                data-img="<%=e.profile_picture%>"
+                id="<%= e._id%>-status"
+                >offline</sub
+              >
+              <% } %>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+        <div class="right-sec">
+          <div class="inbox">
+            <div class="your">
+              <svg
+                aria-label="Share Post"
+                class="_8-yf5"
+                color="#262626"
+                fill="#262626"
+                height="44"
+                role="img"
+                viewBox="0 0 24 19"
+                width="44"
+              >
+                <line
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  x1="22"
+                  x2="9.218"
+                  y1="3"
+                  y2="10.083"
+                ></line>
+                <polygon
+                  fill="none"
+                  points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></polygon>
+              </svg>
+              <h2>Your Messages</h2>
+              <div class="notify">
+                Send private photos and messages to a friend or group.
+              </div>
+            </div>
+            <button class="btn your" id="yourr">Send Message</button>
+          </div>
+          <div class="right-header"></div>
+          <div class="right-chat-sec">
+            <div class="chat-area"></div>
+            <form action="" id="chat-form">
+              <input
+                id="message"
+                name="message"
+                type="text"
+                required
+                placeholder="Enter message"
+              />
+              <button>send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="deleteChatModel"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Unsend</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="delete-chat-form">
+            <div class="modal-body">
+              <input type="hidden" name="id" id="delete-message-id" />
+              <p>Are you sure you want to delete below Message</p>
+              <p><b id="delete-message"></b></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-danger">
+                Unsend
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script> -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"
+      integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var sender_id = "<%=user._id %>";
+      var receiver_id;
+      var socket = io("/user-namespace", {
+        auth: {
+          token: "<%=user._id %>",
+        },
+      });
+
+      function updateScroll(time) {
+        var element = document.querySelector(".chat-area");
+        setTimeout(() => {
+          element.scrollTop = element.scrollHeight;
+        }, time);
+      }
+      document
+        .querySelector(".left-chat-sec")
+        .addEventListener("click", function (e) {
+          updateScroll(500);
+          var userId = e.target.getAttribute("data-id");
+          var userImg = e.target.getAttribute("data-img");
+          var userName = e.target.getAttribute("data-name");
+          if (userId == null || userImg == null || userName == null) {
+            return;
+          }
+          document.querySelector(
+            ".right-header"
+          ).innerHTML = `<a class="content-chat-header" href="/profile/${userId}">
+             <div class="img">
+              <img src="${userImg}" alt="" />
+            </div>
+            <div class="profile-name">${userName}</div></a>`;
+          receiver_id = userId;
+
+          document.querySelector(".inbox").style.display = "none";
+          document.querySelector(".chat-area").style.display = "block";
+          document.querySelector(".right-header").style.display = "flex";
+          document.querySelector("#chat-form").style.display = "flex";
+          socket.emit("existsChat", {
+            sender_id: sender_id,
+            receiver_id: receiver_id,
+          });
+        });
+      socket.on("getOnlineUser", function (data) {
+        // console.log($("#" + data.user_id + "-status"));
+        $("#" + data.user_id + "-status").html("online");
+        $("#" + data.user_id + "-status").removeClass("offline-status");
+        $("#" + data.user_id + "-status").addClass("online-status");
+      });
+      socket.on("getOfflineUser", function (data) {
+        $("#" + data.user_id + "-status").html(`offline`);
+        $("#" + data.user_id + "-status").addClass("offline-status");
+        $("#" + data.user_id + "-status").removeClass("online-status");
+      });
+
+      $("#chat-form").submit(function (e) {
+        e.preventDefault();
+        var message = $("#message").val();
+        $.ajax({
+          url: "/save-chat",
+          type: "POST",
+          data: {
+            sender_id: sender_id,
+            receiver_id: receiver_id,
+            message: message,
+          },
+          success: function (response) {
+            if (response.success) {
+              // console.log(response.data.message);
+              $("#message").val("");
+              let chat = response.data.message;
+              let html = `<div class="receiver" id="${response.data._id}">
+                <h6>${chat}<i class="ri-delete-bin-7-line" data-id="${response.data._id}" data-toggle="modal" data-target="#deleteChatModel"></i></h6>
+              </div>`;
+              $(".chat-area").append(html);
+              socket.emit("newChat", response.data);
+              updateScroll(100);
+            }
+          },
+        });
+      });
+      socket.on("loadNewChat", function (data) {
+        if (sender_id == data.receiver_id && receiver_id == data.sender_id) {
+          let html = `<div class="sender" id="${data._id}">
+              <h6>${data.message}</h6>
+            </div>`;
+          $(".chat-area").append(html);
+          updateScroll(100);
+        }
+      });
+      socket.on("loadChats", function (data) {
+        $(".chat-area").html("");
+        var chats = data.chats;
+        let html = "";
+        chats.forEach((i) => {
+          let addClass = "";
+          if (i.sender_id == sender_id) {
+            addClass = "receiver";
+          } else {
+            addClass = "sender";
+          }
+          html += `<div class="${addClass}" id="${i._id}">
+              <h6>${i.message}
+                ${
+                  i.sender_id == sender_id
+                    ? `<i class="ri-delete-bin-7-line" data-id="${i._id}" data-toggle="modal" data-target="#deleteChatModel"></i>`
+                    : ""
+                }
+              </h6>
+            </div>`;
+        });
+        $(".chat-area").append(html);
+      });
+
+      //delete chat 
+      $(document).on('click','.ri-delete-bin-7-line',function(){
+        var msg = $(this).parent().text();
+        console.log(msg);
+        $('#delete-message').text(msg);
+        $('#delete-message-id').val($(this).attr('data-id'));
+        
+      });
+      $('#delete-chat-form').submit(function(e){
+        e.preventDefault();
+        var id = $('#delete-message-id').val();
+        $.ajax({
+          url:'/delete-chat',
+          type:'POST',
+          data:{
+            id:id
+          },
+          success:function(response){
+            if(response.success){
+              $('#'+id).remove();
+              $('#deleteChatModel').modal('hide');
+              socket.emit('chatDeleted',id)
+            }
+          }
+        })
+      })
+      socket.on('chatMessageDeleted',function(id){
+        console.log(id);
+        $('#'+id).remove();
+      })
+    </script>
+  </body>
+</html>

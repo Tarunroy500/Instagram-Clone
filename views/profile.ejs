@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../stylesheets/profile.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="popup-overlay">
+      <div class="popup">
+        <div class="popup-header">
+          <h2>Edit Profile</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="popup-content">
+          <form>
+            <h3>Name</h3>
+            <input
+              required
+              class="name"
+              type="text"
+              name="fullName"
+              placeholder="Edit your name"
+              value="<%= loggedInUser.fullName %>"
+            />
+            <h3>Bio</h3>
+            <input
+              aria-describedby=""
+              maxlength="30"
+              aria-required="true"
+              autocapitalize="off"
+              autocorrect="off"
+              required
+              class="bio"
+              type="text"
+              name="bio"
+              placeholder="Edit bio"
+              value="<%= loggedInUser.bio %>"
+            />
+            <h3>Links</h3>
+            <input
+              aria-describedby=""
+              maxlength="30"
+              aria-required="true"
+              autocapitalize="off"
+              autocorrect="off"
+              required
+              class="links"
+              type="text"
+              name="links"
+              placeholder="Add external link"
+              value="<%= loggedInUser.links %>"
+            />
+          </form>
+        </div>
+        <div class="popup-footer">
+          <button class="cancel-btn">Cancel</button>
+          <button type="" class="save-btn save-edit">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <nav>
+        <div class="navbar">
+          <div class="instagram-text-logo">
+            <img
+              src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+              id="white-color"
+              alt=""
+            />
+          </div>
+          <div class="sub-section" id="clicked">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <a href="/">Home</a>
+          </div>
+          <div class="sub-section search-btn">
+            <a><i class="fa-solid fa-magnifying-glass search-btn"></i></a>
+            <a class="search-btn">Search</a>
+          </div>
+
+          <div class="sub-section">
+            <a href=""><i class="fa-regular fa-compass"></i></a>
+            <a href="#">Explore</a>
+          </div>
+
+          <div class="sub-section">
+            <a href="/reels"><i class="fa-solid fa-clapperboard"></i></a>
+            <a href="/reels">Reels</a>
+          </div>
+          <div class="sub-section">
+            <a href="/chat"> <i class="fa-regular fa-message"></i></a>
+            <a href="/chat">Messages</a>
+          </div>
+          <div class="sub-section" id="hidden2">
+            <a href="#"> <i class="fa-regular fa-heart"></i></a>
+            <a href="#">Notification</a>
+          </div>
+          <div class="sub-section createpost" id="hidden1">
+            <a><i class="fa-solid fa-square-plus"></i></a>
+            <a>Create</a>
+          </div>
+          <div class="sub-section">
+            <a href="/profile/<%= user._id %>">
+              <div class="profile-img">
+                <img src="<%= user.profile_picture %>" alt="" /></div
+            ></a>
+            <a href="/profile/<%= user._id %>"> Profile</a>
+          </div>
+          <div class="menu-section" id="hidden">
+            <a> <i class="fa-solid fa-bars"></i></a>
+            <a>More</a>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="profile">
+          <div class="profile_picture profile-image">
+            <img src="<%= user.profile_picture %>" alt="" />
+            <input
+              style="display: none"
+              type="file"
+              id="profile-input"
+              name="profilePhoto"
+            />
+          </div>
+          <div class="profile_desc">
+            <div class="profile_name">
+              <h4 class="profile-user-name"><%=user.fullName %></h4>
+              <% if(loggedInUser._id.toString()==user._id.toString()){ %>
+              <button class="profile-edit-btn">Edit profile</button>
+              <% }else if(followUser.followers.includes(loggedInUser._id)
+              &&loggedInUser._id.toString()!=followUser._id.toString()){ %>
+              <a href="/follow/<%=followUser._id %>"
+                ><button>following</button></a
+              >
+              <% }else{ %>
+              <a href="/follow/<%=followUser._id %>"><button>follow</button></a>
+              <% } %>
+              <i class="ri-settings-2-line"></i>
+            </div>
+            <div class="profile_stats">
+              <h4><%= user.posts.length%>&nbsp;Posts</h4>
+              <h4><%=followUser.followers.length %>&nbsp;Followers</h4>
+              <h4><%=followUser.following.length %>&nbsp; Following</h4>
+            </div>
+            <div class="profile_bio">
+              <h6 class="profile-real-bio"><%= user.bio %></h6>
+            </div>
+            <div class="links">
+              <h6 class="profile-real-links"><%= user.links %></h6>
+            </div>
+          </div>
+        </div>
+        <div class="profile__section">
+          <div class="container">
+            <div class="profile__section__tab">
+              <button
+                class="tablinks"
+                onclick="openSection(event, 'Posts')"
+                id="defaultOpen"
+              >
+                <svg
+                  aria-label=""
+                  class="_ab6-"
+                  color="#262626"
+                  fill="#262626"
+                  height="12"
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width="12"
+                >
+                  <rect
+                    fill="none"
+                    height="18"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    width="18"
+                    x="3"
+                    y="3"
+                  ></rect>
+                  <line
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    x1="9.015"
+                    x2="9.015"
+                    y1="3"
+                    y2="21"
+                  ></line>
+                  <line
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    x1="14.985"
+                    x2="14.985"
+                    y1="3"
+                    y2="21"
+                  ></line>
+                  <line
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    x1="21"
+                    x2="3"
+                    y1="9.015"
+                    y2="9.015"
+                  ></line>
+                  <line
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    x1="21"
+                    x2="3"
+                    y1="14.985"
+                    y2="14.985"
+                  ></line>
+                </svg>
+                Posts
+              </button>
+              <button class="tablinks" onclick="openSection(event, 'Videos')">
+                <svg
+                  aria-label=""
+                  class="_ab6-"
+                  color="#8e8e8e"
+                  fill="#8e8e8e"
+                  height="12"
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width="12"
+                >
+                  <path
+                    d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22.5C6.2 22.5 1.5 17.8 1.5 12S6.2 1.5 12 1.5 22.5 6.2 22.5 12 17.8 22.5 12 22.5zm5-11.8l-6.8-3.9c-.5-.3-1-.3-1.5 0-.4.3-.7.7-.7 1.3v7.8c0 .5.3 1 .8 1.3.2.1.5.2.8.2s.5-.1.8-.2l6.8-3.9c.5-.3.8-.8.8-1.3s-.5-1-1-1.3zm-7.5 5.2V8.1l6.8 3.9-6.8 3.9z"
+                  ></path>
+                </svg>
+                Videos
+              </button>
+              <button class="tablinks" onclick="openSection(event, 'Saved')">
+                <svg
+                  aria-label=""
+                  class="_ab6-"
+                  color="#8e8e8e"
+                  fill="#8e8e8e"
+                  height="12"
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width="12"
+                >
+                  <polygon
+                    fill="none"
+                    points="20 21 12 13.44 4 21 4 3 20 3 20 21"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></polygon>
+                </svg>
+                Saved
+              </button>
+            </div>
+
+            <div id="Posts" class="profile__section__tab__tabcontent">
+              <div class="grid-container">
+                <% user.posts.forEach(e=>{ %> <%if(e.filetype=="image"){%>
+                <a href="/singlepost/<%=e._id%>">
+                  <div class="grid-item">
+                    <div class="image-container">
+                      <img src="<%=e.file%>" alt="" />
+                      <div class="image-icon">
+                        <i class="ri-image-line"></i>
+                      </div>
+                      <div class="overlay">
+                        <div class="like-comment">
+                          <i class="fas fa-heart"></i>
+                          <span><%=e.likes.length%></span>
+                          <i class="fas fa-comment"></i>
+                          <span><%=e.comments.length%></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <% }else{%>
+                <a
+                  href="/singlepost/<%=e._id%>"
+                  onmouseover="playVideo(this)"
+                  onmouseout="pauseVideo(this)"
+                >
+                  <div class="grid-item">
+                    <div class="video-container">
+                      <video src="<%=e.file%>" muted></video>
+                      <div class="video-icon">
+                        <i class="ri-movie-2-line"></i>
+                      </div>
+                      <div class="overlay">
+                        <div class="like-comment">
+                          <i class="fas fa-heart"></i>
+                          <span><%= e.likes.length %></span>
+                          <i class="fas fa-comment"></i>
+                          <span><%= e.comments.length %></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <%}%> <% }) %>
+              </div>
+            </div>
+
+            <div id="Videos" class="profile__section__tab__tabcontent">
+              <div class="grid-container">
+                <% user.posts.forEach(e=>{ %> <%if(e.filetype=="video"){%>
+                <a
+                  href="/singlepost/<%=e._id%>"
+                  onmouseover="playVideo(this)"
+                  onmouseout="pauseVideo(this)"
+                >
+                  <div class="grid-item">
+                    <div class="video-container">
+                      <video src="<%=e.file%>" muted></video>
+                      <div class="video-icon">
+                        <i class="ri-movie-2-line"></i>
+                      </div>
+                      <div class="overlay">
+                        <div class="like-comment">
+                          <i class="fas fa-heart"></i>
+                          <span><%= e.likes.length %></span>
+                          <i class="fas fa-comment"></i>
+                          <span><%= e.comments.length %></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <%}%> <% }) %>
+              </div>
+            </div>
+
+            <div id="Saved" class="profile__section__tab__tabcontent">
+              <div class="grid-container">
+                <% book.bookmarks.forEach(e=>{ %> <%if(e.filetype=="image"){%>
+                <a href="/singlepost/<%=e._id%>">
+                  <div class="grid-item">
+                    <div class="image-container">
+                      <img src="<%=e.file%>" alt="" />
+                      <div class="image-icon">
+                        <i class="ri-image-line"></i>
+                      </div>
+                      <div class="overlay">
+                        <div class="like-comment">
+                          <i class="fas fa-heart"></i>
+                          <span><%=e.likes.length%></span>
+                          <i class="fas fa-comment"></i>
+                          <span><%=e.comments.length%></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <% }else{%>
+                <a
+                  href="/singlepost/<%=e._id%>"
+                  onmouseover="playVideo(this)"
+                  onmouseout="pauseVideo(this)"
+                >
+                  <div class="grid-item">
+                    <div class="video-container">
+                      <video src="<%=e.file%>" muted></video>
+                      <div class="video-icon">
+                        <i class="ri-movie-2-line"></i>
+                      </div>
+                      <div class="overlay">
+                        <div class="like-comment">
+                          <i class="fas fa-heart"></i>
+                          <span><%= e.likes.length %></span>
+                          <i class="fas fa-comment"></i>
+                          <span><%= e.comments.length %></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <%}%> <% }) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"
+      integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../javascripts/profile.js"></script>
+  </body>
+</html>

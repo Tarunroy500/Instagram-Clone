@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Reels</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stylesheets/reels.css" />
+
+    <!-- Demo styles -->
+  </head>
+  <body>
+    <div class="overlay">
+      <!-- post upload form -->
+      <form
+        action="/uploadpost"
+        class="upload-form"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="main-nav">
+          <h3>Create Post</h3>
+          <img src="../images/cross.png" alt="" class="cross" />
+        </div>
+        <div class="upload-nav">
+          <div class="img-cnt">
+            <img src="<%= user.profile_picture %>" />
+          </div>
+          <div class="username"><%=user.fullName%></div>
+        </div>
+        <div class="upload-cnt">
+          <input
+            type="text"
+            name="title"
+            placeholder="What's on your mind ?"
+            id=""
+          />
+          <h6 class="upload-err">Invalid File type</h6>
+          <input type="file" name="file" id="file_inp" onchange="checkFile()" />
+          <button type="submit">Post</button>
+        </div>
+      </form>
+    </div>
+    <div class="overlay2"></div>
+    <!-- card overlay -->
+    <div class="search-card mdl-card mdl-shadow--2dp">
+      <h2>Search</h2>
+      <div class="search-inp">
+        <input class="mdl-textfield__input" type="text" id="sample1" />
+      </div>
+      <h4>recent searches</h4>
+      <div class="search-content"></div>
+    </div>
+    <!-- menu overlay -->
+    <div class="menu-overlay">
+      <div class="menu-bar">
+        <a href="#"><i class="ri-settings-3-line"></i></a>
+        <a href="#">settings</a>
+      </div>
+      <div class="menu-bar">
+        <a href="#"><i class="ri-bookmark-line"></i></a>
+        <a href="#">saved</a>
+      </div>
+      <div class="menu-bar">
+        <a href="#"><i class="ri-error-warning-line"></i></a>
+        <a href="#">blocked</a>
+      </div>
+      <div class="menu-bar">
+        <a href="#">Log out</a>
+      </div>
+    </div>
+    <div class="swiper mySwiper">
+      <nav>
+        <div class="navbar">
+          <div class="instagram-text-logo">
+            <img
+              src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+              id="white-color"
+              alt=""
+            />
+          </div>
+          <a class="search-links" href="/">
+            <div class="sub-section" id="clicked">
+              <i class="fa-solid fa-house"></i>Home
+            </div>
+          </a>
+          <a class="search-links">
+            <div class="sub-section">
+              <i class="fa-solid fa-magnifying-glass search-btn"></i>Search
+            </div>
+          </a>
+          <a class="search-links" href="/reels">
+            <div class="sub-section">
+              <i class="fa-solid fa-clapperboard"></i>Reels
+            </div>
+          </a>
+          <a class="search-links" href="/chat">
+            <div class="sub-section">
+              <i class="fa-regular fa-message"></i>Messages
+            </div>
+          </a>
+          
+          <a class="search-links">
+            <div class="sub-section">
+              <i class="fa-regular fa-heart"></i>Notification
+            </div>
+          </a>
+
+
+          <a class="search-links" href="/explore">
+            <div class="sub-section">
+              <i class="fa-regular fa-compass"></i>Explore
+            </div>
+          </a>
+          <a class="search-links">
+            <div class="sub-section">
+              <i class="fa-solid fa-square-plus"></i>Create
+            </div>
+          </a>
+          <a class="search-links" href="/profile/<%= user._id %>">
+            <div class="sub-section">
+              <div class="profile-img">
+                <img src="<%= user.profile_picture %>" alt="" /></div>Profile
+            </div>
+          </a>
+          <div class="menu-section" id="hidden">
+            <a> <i class="fa-solid fa-bars"></i></a>
+            <a>More</a>
+          </div>
+
+          
+          
+        </div>
+      </nav>
+      <!-- Swiper -->
+      <div class="swiper-wrapper">
+        
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"
+      integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- <script src="../javascripts/home.js"></script> -->
+    <script src="../javascripts/reels.js"></script>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Explore</title>
+  </head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../stylesheets/explore.css" />
+  <body>
+    
+    <div class="container">
+      <div class="navbar">
+       <a href="/">
+        <div class="instagram-text-logo">
+          <img
+            src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+            id="white-color"
+            alt=""
+          />
+        </div>
+       </a>
+        <div class="sub-section" id="clicked">
+          <a href="/"><i class="fa-solid fa-house"></i></a>
+          <a href="/">Home</a>
+        </div>
+        <div class="sub-section search-btn">
+          <a><i class="fa-solid fa-magnifying-glass search-btn"></i></a>
+          <a class="search-btn">Search</a>
+        </div>
+
+        <div class="sub-section">
+          <a href="/explore"><i class="fa-regular fa-compass"></i></a>
+          <a href="/explore">Explore</a>
+        </div>
+
+        <div class="sub-section">
+          <a href="/reels"><i class="fa-solid fa-clapperboard"></i></a>
+          <a href="/reels">Reels</a>
+        </div>
+        <div class="sub-section">
+          <a href="/chat"> <i class="fa-regular fa-message"></i></a>
+          <a href="/chat">Messages</a>
+        </div>
+        <div class="sub-section" id="hidden2">
+          <a href="#"> <i class="fa-regular fa-heart"></i></a>
+          <a href="#">Notification</a>
+        </div>
+        <div class="sub-section createpost" id="hidden1">
+          <a><i class="fa-solid fa-square-plus"></i></a>
+          <a>Create</a>
+        </div>
+        <div class="sub-section">
+          <a href="/profile/<%= user._id %>">
+            <div class="profile-img">
+              <img src="<%= user.profile_picture %>" alt="" /></div
+          ></a>
+          <a href="/profile/<%= user._id %>"> Profile</a>
+        </div>
+        <div class="menu-section" id="hidden" onclick="toggleMenu()">
+          <a> <i class="fa-solid fa-bars"></i></a>
+          <a>More</a>
+        </div>
+      </div>
+      <div class="grid-container">
+        <% posts.forEach(e => { if (e.filetype == "image") { %>
+        <a href="/singlepost/<%=e._id%>">
+          <div class="grid-item">
+              <div class="image-container">
+                  <img src="<%=e.file%>" alt="" />
+                  <div class="image-icon"><i class="ri-image-line"></i></div>
+                  <div class="overlay">
+                    <div class="like-comment">
+                      <i class="fas fa-heart"></i> <span><%= e.likes.length %></span>
+                      <i class="fas fa-comment"></i> <span><%= e.comments.length %></span>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </a>
+        <% } else { %>
+        <a
+          href="/singlepost/<%=e._id%>"
+          onmouseover="playVideo(this)"
+          onmouseout="pauseVideo(this)"
+        >
+          <div class="grid-item">
+            <div class="video-container">
+              <video src="<%=e.file%>" muted></video>
+              <div class="video-icon"><i class="ri-movie-2-line"></i></div>
+              <div class="overlay">
+                <div class="like-comment">
+                  <i class="fas fa-heart"></i> <span><%= e.likes.length %></span>
+                  <i class="fas fa-comment"></i> <span><%= e.comments.length %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <% } }) %>
+      </div>
+    </div>
+    <script>
+      function playVideo(element) {
+        var video = element.querySelector("video");
+        video.play();
+      }
+
+      function pauseVideo(element) {
+        var video = element.querySelector("video");
+        video.pause();
+      }
+    </script>
+  </body>
+</html>
