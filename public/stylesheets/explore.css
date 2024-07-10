@@ -1,0 +1,444 @@
+:root {
+  --background-color: rgb(252, 251, 251);
+  --font-color: rgb(0, 0, 0);
+  --secod-font-color: rgb(101, 101, 101);
+  --secondary-font-color: rgb(179, 179, 179);
+  --background-on-hover: rgb(215, 214, 214);
+}
+
+body {
+  margin: 0;
+  font-family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14vw, 1fr));
+  gap: 16px;
+  padding: 16px;
+  grid-template-rows: repeat(auto-fill, minmax(36vh, 1fr));
+  width: 100vw;
+}
+/* .grid-container>a{
+  height: 80%;
+} */
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-container,
+.image-container {
+  position: relative;
+  height: 100%;
+}
+
+.video-icon,
+.image-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: white;
+}
+
+img,
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+video {
+  border: none;
+  outline: none;
+}
+/* Add this CSS to your existing styles */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.grid-item:hover .overlay {
+  opacity: 1;
+}
+
+.like-comment {
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.like-comment i {
+  margin-right: 5px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* overflow: hidden; */
+}
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+/* Add this CSS to style the left navigation */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 95vh;
+  width: 225px;
+  /* justify-content: space-between; */
+  background-color: var(--background-color);
+  /* background-color: #2c0707; */
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-inline: 10px;
+  border-right: 0.1px solid rgba(76, 75, 75, 0.466);
+  position: sticky;
+  top: 0px;
+}
+.navbar > a {
+  all: unset;
+  font-weight: 200;
+}
+
+@media (max-width: 750px) {
+  .container .navbar {
+    flex-direction: row;
+    background-color: var(--background-color);
+    position: fixed;
+    z-index: 1000;
+    height: 60px;
+    bottom: -1px;
+    top: auto;
+    gap: 0;
+    border-right: none;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    box-shadow: -1px 14px 20px 4px black;
+  }
+
+  .middle-section .post-section {
+    padding: 40px 5px;
+  }
+
+  .navbar a {
+    display: none;
+  }
+
+  .navbar .sub-section {
+    padding: 10px 10px;
+  }
+
+  #hidden {
+    display: none;
+  }
+
+  #hidden1 {
+    display: none;
+  }
+
+  #hidden2 {
+    display: none;
+  }
+
+  .instagram-text-logo {
+    display: none;
+  }
+}
+
+@media (max-width: 1198px) {
+  .navbar .sub-section a {
+    display: none;
+  }
+
+  .navbar .menu-section a {
+    display: none;
+  }
+
+  .navbar .sub-section {
+    gap: 0;
+  }
+
+  .instagram-text-logo {
+    display: none;
+    /* position: absolute; */
+  }
+
+  .navbar {
+    width: 79px;
+  }
+}
+
+@media (max-width: 1003px) {
+  .follow-section {
+    display: none;
+  }
+
+  .middle-section .post-area {
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: 690px) {
+  .post-section .story-section {
+    justify-content: space-evenly;
+  }
+
+  .story-section #story-7 {
+    display: none;
+  }
+}
+
+@media (max-width: 562px) {
+  .story-section #story-6 {
+    display: none;
+  }
+}
+
+@media (max-width: 482px) {
+  .story-section #story-5 {
+    display: none;
+  }
+}
+
+@media (max-width: 402px) {
+  .story-section #story-4 {
+    display: none;
+  }
+}
+
+@media (max-width: 323px) {
+  #story-3 {
+    display: none;
+  }
+}
+
+@media (max-width: 259px) {
+  #story-2 {
+    display: none;
+  }
+}
+
+.instagram-text-logo {
+  width: 100px;
+  margin: 15px 20px;
+  cursor: pointer;
+}
+
+.instagram-text-logo img {
+  width: 100%;
+  /* filter: brightness(5); */
+}
+
+.sub-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+}
+
+.sub-section:hover {
+  background-color: var(--background-on-hover);
+}
+
+.sub-section:hover i {
+  transform: scale(1.07);
+  transition: all 0.2s ease;
+}
+
+.sub-section:hover a {
+  font-weight: 600;
+}
+
+.sub-section:hover .profile-img {
+  transform: scale(1.07);
+  transition: all 0.2s ease;
+}
+
+.sub-section i {
+  font-size: 1.3rem;
+  color: var(--font-color);
+  transition: all 0.2s ease;
+}
+
+.profile-img {
+  width: 22px;
+  height: 22px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.menu-section {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  /* position: absolute;
+    bottom: 10px; */
+  margin-top: 23px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+.menu-section:hover {
+  background-color: var(--background-on-hover);
+}
+
+.menu-section:hover i {
+  transform: scale(1.07);
+  transition: all 0.2s ease;
+}
+
+.menu-section i {
+  color: var(--font-color);
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+/* active naviation */
+.active {
+  font-weight: bold !important;
+  background-color: rgb(215, 214, 214) !important;
+  border-radius: 1  0px !important;
+}
+
+/* post overlay */
+.post-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.414);
+  /* background-color: lightcoral; */
+  display: none;
+  z-index: 11;
+  overflow: hidden;
+}
+.upload-form {
+  top: 50%;
+  width: 32vw;
+  height: 70vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  background: #fff;
+  /* background-color: red; */
+  border-radius: var(--card-border-radius);
+  z-index: 12;
+  display: flex;
+  box-shadow: 2px 2px 2px #0000003f;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: 5px;
+}
+.main-nav-post {
+  /* position: relative; */
+  /* width: 100%; */
+  /* height: 100%; */
+  padding: 1rem;
+  border-bottom: 0.1px solid #00000067;
+}
+
+.main-nav-post h3 {
+  text-align: center;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+}
+.upload-nav-post {
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  height: 80%;
+  align-items: end;
+  justify-content: center;
+  /* background-color: red; */
+  margin-bottom: 40px;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+.post-img {
+  display: none;
+  width: 100%;
+  height: 70%;
+  align-items: center;
+  /* justify-content: center; */
+  /* gap: 20px; */
+  flex-direction: column;
+}
+
+.post-img span {
+  font-family: "Courier New", Courier, monospace;
+  padding: 0.5rem;
+}
+.image-preview {
+  width: 90%;
+  height: 90%;
+}
+.post-img .image-preview img {
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+  height: 100%;
+}
+.post-img .vdo-preview {
+  width: 90%;
+  height: 90%;
+}
+.post-img .vdo-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.upload-cnt {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  /* background-color: red; */
+}
+#file_inp {
+  display: none;
+}
+.upload-err {
+  color: red;
+  display: none;
+}

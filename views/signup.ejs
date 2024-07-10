@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../stylesheets/signup.css" />
+    <title>Signup</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="page">
+        <div class="header">
+          <h1 class="logo">Pictogram</h1>
+          <p>Sign up to see photos and videos from your friends.</p>
+          <button>
+            <i class="fab fa-facebook-square"></i> Log in with Facebook
+          </button>
+          <div>
+            <hr />
+            <p>OR</p>
+            <hr />
+          </div>
+        </div>
+        <div class="container">
+          <form action="/register" method="post">
+            <input
+              aria-describedby=""
+              maxlength="30"
+              aria-required="true"
+              autocapitalize="off"
+              autocorrect="off"
+              type="email"
+              placeholder="Email"
+              name="email"
+              aria-required="true"
+            />
+            <input
+              aria-describedby=""
+              maxlength="30"
+              aria-required="true"
+              autocapitalize="off"
+              autocorrect="off"
+              type="text"
+              placeholder="Full Name"
+              name="fullName"
+              aria-required="true"
+            />
+            <input
+              aria-describedby=""
+              maxlength="30"
+              aria-required="true"
+              autocapitalize="off"
+              autocorrect="off"
+              type="number"
+              placeholder="Phone Number"
+              name="number"
+              aria-required="true"
+            />
+            <input
+              aria-describedby=""
+              maxlength="30"
+              aria-required="true"
+              autocapitalize="off"
+              autocorrect="off"
+              type="password"
+              placeholder="Password"
+              name="password"
+            />
+            <button>Sign up</button>
+          </form>
+
+          <ul>
+            <li>By signing up, you agree to our</li>
+            <li><a href="">Terms</a></li>
+            <li><a href="">Data Policy</a></li>
+            <li>and</li>
+            <li><a href="">Cookies Policy</a> .</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="option">
+        <p>Have an account? <a href="/">Log in</a></p>
+      </div>
+      <div class="otherapps">
+        <p>Get the app.</p>
+        <button type="button"><i class="fab fa-apple"></i> App Store</button>
+        <button type="button">
+          <i class="fab fa-google-play"></i> Google Play
+        </button>
+      </div>
+      <div class="footer">
+        <ul>
+          <li><a href="">ABOUT</a></li>
+          <li><a href="">HELP</a></li>
+          <li><a href="">PRESS</a></li>
+          <li><a href="">API</a></li>
+          <li><a href="">JOBS</a></li>
+          <li><a href="">PRIVACY</a></li>
+          <li><a href="">TEMS</a></li>
+          <li><a href="">LOCATIONS</a></li>
+          <li><a href="">TOP ACCOUNTS</a></li>
+          <li><a href="">HASHTAGS</a></li>
+          <li><a href="">LANGUAGE</a></li>
+        </ul>
+        <p>© 2020 PICTUREGRAM</p>
+      </div>
+    </main>
+  </body>
+  <script>
+    $(document).ready(function () {
+      $("form").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: "/register",
+          data: $("form").serialize(),
+          success: function (response) {
+            console.log(response);
+            if (response.message == "success") {
+              toastr.success(response.message);
+              window.location.href = "/";
+            } else {
+              toastr.error(response.message);
+            }
+          },
+        });
+      });
+    });
+  </script>
+</html>

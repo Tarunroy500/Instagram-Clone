@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pictogram</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stylesheets/home.css" />
+  </head>
+  <body>
+    <% function timeAgo(input) { const date = input instanceof Date ? input :
+    new Date(input); const formatter = new Intl.RelativeTimeFormat("en"); const
+    ranges = { years: 3600 * 24 * 365, months: 3600 * 24 * 30, weeks: 3600 * 24
+    * 7, days: 3600 * 24, hours: 3600, minutes: 60, seconds: 1, }; const
+    secondsElapsed = (date.getTime() - Date.now()) / 1000; for (let key in
+    ranges) { if (ranges[key] < Math.abs(secondsElapsed)) { const delta =
+    secondsElapsed / ranges[key]; return formatter.format(Math.round(delta),
+    key); } } } %>
+    <div class="main">
+      <div class="post-menu">
+        <div class="upload-form2">
+          <div class="menu-container">
+            <button style="color: #ed4956" class="menu-items block">
+              <b class="block">Block Account</b>
+            </button>
+            <button style="color: #ed4956" class="menu-items">
+              <b>Unfollow</b>
+            </button>
+            <button
+              style="color: #ed4956; display: none"
+              class="menu-items delete"
+            >
+              <b class="delete">Delete</b>
+            </button>
+            <button class="menu-items goto">Go to post</button>
+            <button class="menu-items copy">Copy link</button>
+            <button class="menu-items about-account">About this account</button>
+            <button class="menu-items cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="share-overlay">
+        <div class="upload-form2">
+          <div id="popup-container">
+            <div class="cross1" id="close-button">×</div>
+            <span style="margin-left: 106px"><b>Share</b></span>
+            <% allUser.forEach((e)=>{ %>
+            <div class="user-list">
+              <div class="img-name-container">
+                <div class="profile-img">
+                  <img src="<%= e.profile_picture %>" alt="" />
+                </div>
+                <div class="profile-name">
+                  <h3><%=e.fullName%></h3>
+                </div>
+              </div>
+              <button id="<%= e.id %>" class="send-button">send</button>
+            </div>
+            <%}) %>
+          </div>
+        </div>
+      </div>
+      <div class="share-btn">
+        <div class="upload-form">
+          <div class="share-icons">
+            <a class="whatsapp-a" target="_blank" href=""
+              ><i class="ri-whatsapp-line"></i
+            ></a>
+            <a> <i class="ri-qr-scan-2-line"></i></a>
+            <a><i class="fa-regular fa-message msg-share"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="overlay4">
+        <form
+          action="/uploadstory"
+          class="upload-form"
+          method="post"
+          enctype="multipart/form-data"
+          onsubmit="return checkFile('file_inp-story')"
+        >
+          <div class="main-nav">
+            <h3>Create Story</h3>
+          </div>
+          <div class="upload-nav">
+            <svg
+              class="svgg"
+              aria-label="Icon to represent media such as images or videos"
+              class="x1lliihq x1n2onr6 x5n08af"
+              fill="currentColor"
+              height="77"
+              role="img"
+              viewBox="0 0 97.6 77.3"
+              width="96"
+            >
+              <title>Icon to represent media such as images or videos</title>
+              <path
+                d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M84.7 18.4 58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M78.2 41.6 61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+          <div class="story-img">
+            <span> Preview: </span>
+            <img style="display: none" class="imgg" src="" alt="" />
+            <video
+              style="display: none"
+              class="vdo"
+              controls
+              autoplay
+              loop
+              src=""
+            ></video>
+          </div>
+          <div class="upload-cnt">
+            <input
+              class="story-inp"
+              id="file_inp-story"
+              type="file"
+              name="file"
+              onchange="checkFile(id)"
+            />
+            <button type="submit">Add to Story</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="notification" id="notification">
+        <h2>Notifications</h2>
+        <% noti.reverse().forEach((i)=>{%>
+        <%if(i.userFrom._id.toString()!=i.userTo._id.toString()){ %>
+        <%if(i.notificationType == "like"){ %>
+        <div class="notification-list">
+          <a href="/singlepost/<%=i.entityId %>" class="notification-item">
+            <div class="user-avatar">
+              <img src="<%=i.userFrom.profile_picture %>" alt="User Avatar" />
+            </div>
+            <div class="notification-content">
+              <p>
+                <span class="username"><%= i.userFrom.fullName %></span> liked
+                your post.
+              </p>
+              <span class="timestamp"><%=timeAgo(i.time)%></span>
+            </div>
+          </a>
+        </div>
+        <%}%>
+        <%if(i.notificationType == "follow"){ %>
+        <div class="notification-list">
+          <a href="/profile/<%=i.userFrom._id%>" class="notification-item">
+            <div class="user-avatar">
+              <img src="<%=i.userFrom.profile_picture %>" alt="User Avatar" />
+            </div>
+            <div class="notification-content">
+              <p>
+                <span class="username"><%= i.userFrom.fullName %></span> started
+                follow you.
+              </p>
+              <span class="timestamp"><%=timeAgo(i.time)%></span>
+            </div>
+          </a>
+        </div>
+        <%}%>
+         <%if(i.notificationType == "comment"){%>
+        <div class="notification-list">
+          <a href="/singlepost/<%= i.entityId %>" class="notification-item">
+            <div class="user-avatar">
+              <img src="<%= i.userFrom.profile_picture %>" alt="User Avatar" />
+            </div>
+            <div class="notification-content">
+              <p>
+                <span class="username"><%= i.userFrom.fullName %></span>
+                commented on your post
+              </p>
+              <span class="timestamp"><%=timeAgo(i.time)%></span>
+            </div>
+          </a>
+        </div>
+        <%}%> <%}%> <%}) %>
+      </div>
+
+      <div class="share-menu">
+        <div class="upload-form">
+          <div class="upload-cnt">
+            <img class="qrimg" src="" alt="" />
+            <h4>scan here to share post</h4>
+          </div>
+        </div>
+      </div>
+      <div class="overlay3"></div>
+      <div class="overlay">
+        <form
+          action="/uploadpost"
+          class="upload-form"
+          method="post"
+          enctype="multipart/form-data"
+          onsubmit="return checkFile('file_inp')"
+        >
+          <div class="main-nav-post">
+            <h3>Create Post</h3>
+          </div>
+          <div class="upload-nav-post">
+            <svg
+              class="svgg"
+              aria-label="Icon to represent media such as images or videos"
+              class="x1lliihq x1n2onr6 x5n08af"
+              fill="currentColor"
+              height="77"
+              role="img"
+              viewBox="0 0 97.6 77.3"
+              width="96"
+            >
+              <title>Icon to represent media such as images or videos</title>
+              <path
+                d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M84.7 18.4 58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M78.2 41.6 61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+          <div class="post-img">
+            <span> Preview: </span>
+            <img style="display: none" class="imgg-post" src="" alt="" />
+            <video
+              style="display: none"
+              class="vdo-post"
+              controls
+              autoplay
+              loop
+              src=""
+            ></video>
+          </div>
+          <div class="upload-cnt">
+            <input
+              type="text"
+              name="title"
+              placeholder="What's on your mind ?"
+              id=""
+            />
+            <h6 class="upload-err">Invalid File type</h6>
+            <input
+              type="file"
+              name="file"
+              id="file_inp"
+              onchange="checkFile(id)"
+            />
+            <button type="submit">Post</button>
+          </div>
+        </form>
+      </div>
+      <div class="overlay2"></div>
+
+      <div class="search-card mdl-card mdl-shadow--2dp">
+        <h2>Search</h2>
+        <div class="search-inp">
+          <input class="mdl-textfield__input" type="text" id="sample1" />
+        </div>
+        <h4>search result</h4>
+        <div class="search-content"></div>
+      </div>
+
+      <div class="menu-overlay">
+        <div class="menu-bar">
+          <a href="#"><i class="ri-settings-3-line"></i></a>
+          <a href="#">settings</a>
+        </div>
+        <div class="menu-bar">
+          <a href="#"><i class="ri-bookmark-line"></i></a>
+          <a href="#">saved</a>
+        </div>
+        <div class="menu-bar">
+          <a href="#"><i class="ri-error-warning-line"></i></a>
+          <a href="#">blocked</a>
+        </div>
+        <div class="menu-bar">
+          <a href="/logout">Log out</a>
+        </div>
+      </div>
+      <div class="container">
+        <nav>
+          <div class="navbar">
+            <div class="instagram-text-logo">
+              <!-- <img
+                src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+                id="white-color"
+                alt=""
+              /> -->
+              <h2><i style="font-weight: 400;">Pictogram</i></h2>
+            </div>
+            <a
+              class="search-links home-btn <%=currentRoute === '/'?'active':'' %>"
+              href="/"
+            >
+              <div class="sub-section" id="clicked">
+                <i class="fa-solid fa-house"></i>Home
+              </div>
+            </a>
+            <a class="search-links search-btn">
+              <div class="sub-section search-btn">
+                <i class="fa-solid fa-magnifying-glass search-btn"></i>Search
+              </div>
+            </a>
+            <a class="search-links" href="/reels">
+              <div class="sub-section">
+                <i class="fa-solid fa-clapperboard"></i>Reels
+              </div>
+            </a>
+            <a class="search-links" href="/chat">
+              <div class="sub-section">
+                <i class="fa-regular fa-message"></i>Messages
+              </div>
+            </a>
+
+            <a class="search-links notification-btn" id="notification">
+              <div class="sub-section" id="notification">
+                <i id="notification" class="fa-regular fa-heart"></i
+                >Notification
+              </div>
+            </a>
+
+            <a class="search-links" href="/explore">
+              <div class="sub-section">
+                <i class="fa-regular fa-compass"></i>Explore
+              </div>
+            </a>
+            <a class="search-links createpost">
+              <div class="sub-section">
+                <i class="fa-solid fa-square-plus"></i>Create
+              </div>
+            </a>
+            <a class="search-links" href="/profile/<%= user._id %>">
+              <div class="sub-section">
+                <div class="profile-img">
+                  <img src="<%= user.profile_picture %>" alt="" />
+                </div>
+                Profile
+              </div>
+            </a>
+            <div class="menu-section" onclick="toggleMenu()" id="hidden">
+              <a> <i class="fa-solid fa-bars"></i></a>
+              <a>More</a>
+            </div>
+          </div>
+        </nav>
+        <div class="middle-section">
+          <div class="post-section">
+            <div class="nav-hidden">
+              <div class="nav-hidden-logo" id="white-2color">
+                <img
+                  src="https://i.postimg.cc/qMFTcDw1/instagram-text.png"
+                  alt=""
+                />
+              </div>
+              <div class="nav-hide-2">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-paper-plane"></i>
+              </div>
+            </div>
+            <div class="story-section"></div>
+            <div class="post-area"></div>
+          </div>
+        </div>
+        <div class="follow-section">
+          <div class="profile-follow profile-foolow-hovering">
+            <a href="/profile/<%= user._id %>">
+              <div class="profile-follow-left">
+                <div class="profile-follow-image">
+                  <img src="<%= user.profile_picture %>" alt="" />
+                </div>
+                <div class="profile-follow-content">
+                  <p class="profile-id"><%= user.fullName %></p>
+                </div>
+              </div>
+            </a>
+            <a href="/logout" class="follow">Logout</a>
+          </div>
+          <div class="suggestion-follow">
+            <p class="suggestion">Suggested for you</p>
+            <a href="#" class="see-all">see all</a>
+          </div>
+          <% allUser.forEach(e => { %> <%
+          console.log(e.followers.includes(user._id)) %> <%
+          if(e.followers.includes(user._id)===false){ %>
+          <a href="/profile/<%=e._id %>">
+            <div class="profile-follow profile-foolow-hovering">
+              <div class="profile-follow-left">
+                <div class="profile-follow-image">
+                  <img src="<%= e.profile_picture%>" alt="" />
+                </div>
+                <div class="profile-follow-content">
+                  <p class="profile-id"><%= e.fullName%></p>
+                </div>
+              </div>
+              <% if(e.followers.includes(user._id)){ %>
+              <a href="/follow/<%=e._id%>" class="follow">Unfollow</a>
+              <% } else{ %>
+              <a href="/follow/<%=e._id%>" class="follow">follow</a>
+              <% } %>
+            </div>
+          </a>
+          <% } %> <% }); %>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"
+      integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../javascripts/home.js"></script>
+  </body>
+</html>

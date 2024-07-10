@@ -1,0 +1,238 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    /* background-color: aqua; */
+    color: black;
+}
+.main{
+    width: 100%;
+    height: 100%;
+}
+.nav{
+    width: 100%;
+    height: 10%;
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    font-size: xx-large;
+}
+.nav a{
+    all: unset;
+}
+.reel-container{
+    width: 100%;
+    height: 90%;
+    /* background-color: blueviolet; */
+    display: flex;
+    justify-content: center;
+}
+.reel-section{
+    width: 35%;
+    height: 100%;
+    /* background-color: cadetblue; */
+    display: flex;
+    align-items: end;
+}
+.reel-vdo{
+    width: 90%;
+    height: 100%;
+    /* background-color: azure; */
+    overflow: hidden;
+    /* object-fit: cover; */
+    /* object-position: center; */
+}
+.reel-vdo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* object-position: center; */
+}
+.reel-vdo video{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+}
+.profile{
+    /* width: 30%; */
+    height: 70px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    /* background-color:blue; */
+    color: #fff;
+    position: absolute;
+    top: 10%;
+    padding-left: 10px;
+
+}
+.profile a{
+    all:unset;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.profile button{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+.reel-img{
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.reel-img img{
+    width: 100%;
+    height: 100%;
+}
+.feature-icons{
+  width: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  height: fit-content;
+  font-size:xx-large;
+  /* background-color: #385898; */
+}
+/* .comments{
+    width: 20%;
+    padding: 10px;
+    height: 60%;
+    background-color: red;
+    border: .1px solid #33333344;
+    border-radius: 10px;
+    position: absolute;
+    right: 12%;
+    top: 30%;
+}
+.comments>a{
+    all: unset;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.comments>h4{
+    margin-left: 50px;
+    margin-right: 10px;
+    display: inline;
+}
+.comments h5{
+    display: inline;
+}
+.comments h5 a{
+    all:unset; */
+/* } */
+
+/* comment */
+.comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 100%;
+  }
+  .comment-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .comment-nav h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+  }
+  .comment-nav .add-cmt {
+    cursor: pointer;
+  }
+  .comment-nav a:hover {
+    color: #1565c0;
+  }
+  .comment-nav a i {
+    margin-right: 5px;
+    font-size: 20px;
+  }
+  .main-comments {
+    height: 100%;
+    padding: 10px 0;
+    overflow-y: scroll;
+  }
+  .comment {
+    display: flex;
+  }
+  .comment-header {
+    width: 90px;
+    /* height: 100px; */
+    border-radius: 50%;
+    padding: 7px;
+  }
+  .comment-header img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+  .comment-body {
+    padding: 10px 0;
+    margin-left: 10px;
+    width: 140%;
+  }
+  .dlt-cmt {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 0, 0, 0.609);
+    cursor: pointer;
+    float: right;
+  }
+  .dlt-cmt img {
+    width: 20px;
+    height: 20px;
+  }
+  .comment-body h2 {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
+  }
+  .comment-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    gap: 10px;
+  }
+  .comment-footer input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+  }
+  .comment-footer input:focus {
+    border: 1px solid #1877f2;
+  }
+  .comment-footer button {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
