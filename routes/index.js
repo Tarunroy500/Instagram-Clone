@@ -274,7 +274,7 @@ router.get("/profile/:id", isLoggedIn, async function (req, res, next) {
 
 router.get("/shareqr/:id", isLoggedIn, async function (req, res, next) {
   const post = await postSchema.findOne({ _id: req.params.id });
-  const qrCodeData = `https://pictogram-2ebi.onrender.com/singlepost/${post._id}`;
+  const qrCodeData = `http://localhost:3000/singlepost/${post._id}`;
   var qrCode = await qr.toDataURL(qrCodeData);
   res.json({ qrCode: qrCode });
 });
